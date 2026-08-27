@@ -1,69 +1,227 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="az">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Qutu Yarışı</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top,#30205d 0,#100b1d 55%,#07050c 100%);color:#fff;display:flex;justify-content:center;align-items:center;overflow:hidden}
-.wrap{width:min(100%,520px);min-height:100vh;padding:26px 18px 24px;display:flex;flex-direction:column;justify-content:center;text-align:center}
-.badge{display:inline-block;margin:0 auto 10px;padding:7px 14px;border:1px solid #ffffff33;border-radius:999px;background:#ffffff10;font-size:13px}
-h1{margin:0;font-size:38px;letter-spacing:1px;text-shadow:0 5px 22px #000}h1 span{color:#ffd84d}
-.sub{font-size:16px;margin:10px 0 22px;color:#ddd}
-.boxes{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:10px 0 18px}
-.box{border:0;background:transparent;color:#fff;cursor:pointer;padding:0;min-width:0}.box:disabled{cursor:default;opacity:.95}
-.lid,.body{margin:auto;width:100%;aspect-ratio:1/1.02;border-radius:12px;box-shadow:0 12px 24px #0008}
-.lid{height:24px;background:linear-gradient(135deg,#ffdb55,#ff9d16);border:2px solid #ffe99a;margin-bottom:3px}
-.body{position:relative;background:linear-gradient(145deg,#f8b62b,#b85705);border:2px solid #ffd86a;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900}
-.body:after{content:"";position:absolute;left:43%;top:0;width:14%;height:100%;background:#ffe36d99}
-.num{position:absolute;z-index:2;bottom:7px;background:#111c;border-radius:50%;width:30px;height:30px;line-height:30px;font-size:15px}
-.box.open .lid{animation:lid .6s forwards}.box.open .body{animation:pop .6s}.box.win .body{box-shadow:0 0 35px #ffd43b,0 15px 30px #0008}
-@keyframes lid{to{transform:translateY(-30px) rotate(-12deg)}}@keyframes pop{50%{transform:scale(1.08)}}
-.card{background:#ffffff0e;border:1px solid #ffffff22;border-radius:20px;padding:18px;backdrop-filter:blur(10px)}
-.join{font-size:20px;font-weight:800;color:#ffe066}.small{font-size:13px;color:#bbb;margin-top:6px}
-.result{min-height:52px;margin-top:12px;font-size:22px;font-weight:800}
-button.reset{border:0;border-radius:14px;padding:12px 20px;background:#fff;color:#111;font-weight:800;font-size:15px}
-.hidden{display:none}
-@media(max-width:380px){h1{font-size:31px}.sub{font-size:14px}.boxes{gap:5px}.body{font-size:18px}}
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    padding: 25px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    margin: 0 0 10px;
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.subtitle {
+    margin: 0 0 25px;
+    font-size: 17px;
+    color: #e2e8f0;
+}
+
+.boxes {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.box {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border: none;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #ef4444, #991b1b);
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    transition: 0.2s;
+}
+
+.box:active {
+    transform: scale(0.94);
+}
+
+.box.selected {
+    background: linear-gradient(145deg, #22c55e, #15803d);
+    transform: scale(1.05);
+}
+
+.join {
+    margin-top: 25px;
+    padding: 14px 22px;
+    border-radius: 14px;
+    background: #be123c;
+    font-size: 18px;
+    font-weight: 800;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+}
+
+.info {
+    margin-top: 15px;
+    color: #cbd5e1;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.result {
+    margin-top: 18px;
+    min-height: 28px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.reset {
+    margin-top: 18px;
+    border: none;
+    padding: 11px 20px;
+    border-radius: 12px;
+    background: white;
+    color: #111827;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@media (max-width: 420px) {
+    h1 {
+        font-size: 27px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+    }
+
+    .boxes {
+        gap: 7px;
+    }
+
+    .box {
+        border-radius: 14px;
+        font-size: 22px;
+    }
+
+    .join {
+        font-size: 16px;
+    }
+}
 </style>
 </head>
+
 <body>
-<div class="wrap">
-  <div class="badge">🎁 TIKTOK LIVE OYUNU</div>
-  <h1>QUTU <span>YARIŞI</span></h1>
-  <div class="sub">1-dən 5-ə qədər bir qutu seç!</div>
-  <div class="boxes" id="boxes"></div>
-  <div class="card">
-    <div class="join">🌹 5 GÜL AT → YARIŞA QOŞUL</div>
-    <div class="small">İştirakçı qutusunu seçəndə həmin qutuya toxun.</div>
-    <div class="result" id="result">Hazırıq! 👀</div>
-    <button class="reset" onclick="newGame()">Yeni oyun</button>
-  </div>
+
+<div class="container">
+
+    <h1>QUTU YARIŞI</h1>
+
+    <div class="subtitle">
+        1-dən 5-ə qədər bir qutu seç!
+    </div>
+
+    <div class="boxes">
+
+        <button class="box" onclick="chooseBox(1)">
+            🎁1
+        </button>
+
+        <button class="box" onclick="chooseBox(2)">
+            🎁2
+        </button>
+
+        <button class="box" onclick="chooseBox(3)">
+            🎁3
+        </button>
+
+        <button class="box" onclick="chooseBox(4)">
+            🎁4
+        </button>
+
+        <button class="box" onclick="chooseBox(5)">
+            🎁5
+        </button>
+
+    </div>
+
+    <div class="join">
+        🌹 5 GÜL AT → YARIŞA QOŞUL
+    </div>
+
+    <div class="info">
+        İştirakçı qutusunu seçəndə həmin qutuya toxun.<br>
+        Hazırıq! 👀
+    </div>
+
+    <div id="result" class="result"></div>
+
+    <button class="reset" onclick="resetGame()">
+        Yeni oyun
+    </button>
+
 </div>
+
 <script>
-let prize;
-function newGame(){
-  prize=Math.floor(Math.random()*5);
-  document.getElementById('result').textContent='Hazırıq! 👀';
-  render();
+
+let selected = false;
+
+function chooseBox(number) {
+
+    if (selected) return;
+
+    selected = true;
+
+    const boxes = document.querySelectorAll(".box");
+
+    boxes[number - 1].classList.add("selected");
+
+    document.getElementById("result").textContent =
+        "🎉 " + number + "-ci qutu seçildi!";
 }
-function render(){
-  const el=document.getElementById('boxes'); el.innerHTML='';
-  for(let i=0;i<5;i++){
-    const b=document.createElement('button'); b.className='box'; b.innerHTML='<div class="lid"></div><div class="body">🎁<span class="num">'+(i+1)+'</span></div>';
-    b.onclick=()=>openBox(i,b); el.appendChild(b);
-  }
+
+function resetGame() {
+
+    selected = false;
+
+    document.querySelectorAll(".box").forEach(function(box) {
+        box.classList.remove("selected");
+    });
+
+    document.getElementById("result").textContent = "";
 }
-function openBox(i,b){
-  document.querySelectorAll('.box').forEach(x=>x.disabled=true);
-  b.classList.add('open');
-  setTimeout(()=>{
-    const win=i===prize;
-    if(win){b.classList.add('win');document.getElementById('result').innerHTML='🎉 TƏBRİKLƏR! <span style="color:#ffd84d">1 AZN</span> MÜKAFAT! 💰';}
-    else document.getElementById('result').textContent='😔 Təəssüf, bu qutu boş idi.';
-  },650);
-}
-newGame();
+
 </script>
+
 </body>
 </html>
