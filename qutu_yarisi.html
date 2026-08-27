@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Qutu Yarışı</title>
 
 <style>
@@ -11,104 +10,88 @@
     box-sizing: border-box;
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100%;
-}
-
 body {
+    margin: 0;
     min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #111827, #1f2937);
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    font-family: Arial, sans-serif;
-    color: white;
     text-align: center;
 }
 
 .container {
     width: 100%;
-    max-width: 500px;
-    padding: 25px 18px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    max-width: 520px;
+    padding: 20px;
 }
 
 h1 {
-    margin: 0 0 10px;
     font-size: 32px;
-    font-weight: 800;
+    margin-bottom: 10px;
 }
 
-.subtitle {
-    margin: 0 0 25px;
-    font-size: 17px;
-    color: #e2e8f0;
+p {
+    color: #cbd5e1;
+    margin-bottom: 25px;
 }
 
 .boxes {
-    width: 100%;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
 }
 
 .box {
-    width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1;
     border: none;
-    border-radius: 18px;
+    border-radius: 16px;
     background: linear-gradient(145deg, #ef4444, #991b1b);
     color: white;
-    font-size: 25px;
+    font-size: 28px;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    box-shadow: 0 8px 18px #0006;
     transition: 0.2s;
 }
 
+.box:hover {
+    transform: translateY(-4px);
+}
+
 .box:active {
-    transform: scale(0.94);
+    transform: scale(0.96);
 }
 
 .box.selected {
     background: linear-gradient(145deg, #22c55e, #15803d);
-    transform: scale(1.05);
 }
 
 .join {
     margin-top: 25px;
-    padding: 14px 22px;
-    border-radius: 14px;
-    background: #be123c;
     font-size: 18px;
-    font-weight: 800;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    font-weight: bold;
 }
 
 .info {
-    margin-top: 15px;
+    margin-top: 12px;
     color: #cbd5e1;
     font-size: 15px;
-    line-height: 1.5;
 }
 
 .result {
-    margin-top: 18px;
-    min-height: 28px;
-    font-size: 20px;
+    margin-top: 20px;
+    min-height: 30px;
+    font-size: 21px;
     font-weight: bold;
 }
 
 .reset {
-    margin-top: 18px;
+    margin-top: 15px;
+    padding: 12px 22px;
     border: none;
-    padding: 11px 20px;
     border-radius: 12px;
     background: white;
     color: #111827;
@@ -121,21 +104,13 @@ h1 {
         font-size: 27px;
     }
 
-    .subtitle {
-        font-size: 16px;
-    }
-
     .boxes {
         gap: 7px;
     }
 
     .box {
-        border-radius: 14px;
-        font-size: 22px;
-    }
-
-    .join {
-        font-size: 16px;
+        font-size: 23px;
+        border-radius: 13px;
     }
 }
 </style>
@@ -147,31 +122,15 @@ h1 {
 
     <h1>QUTU YARIŞI</h1>
 
-    <div class="subtitle">
-        1-dən 5-ə qədər bir qutu seç!
-    </div>
+    <p>1-dən 5-ə qədər bir qutu seç!</p>
 
     <div class="boxes">
 
-        <button class="box" onclick="chooseBox(1)">
-            🎁1
-        </button>
-
-        <button class="box" onclick="chooseBox(2)">
-            🎁2
-        </button>
-
-        <button class="box" onclick="chooseBox(3)">
-            🎁3
-        </button>
-
-        <button class="box" onclick="chooseBox(4)">
-            🎁4
-        </button>
-
-        <button class="box" onclick="chooseBox(5)">
-            🎁5
-        </button>
+        <button class="box" onclick="chooseBox(1)">🎁1</button>
+        <button class="box" onclick="chooseBox(2)">🎁2</button>
+        <button class="box" onclick="chooseBox(3)">🎁3</button>
+        <button class="box" onclick="chooseBox(4)">🎁4</button>
+        <button class="box" onclick="chooseBox(5)">🎁5</button>
 
     </div>
 
@@ -186,9 +145,7 @@ h1 {
 
     <div id="result" class="result"></div>
 
-    <button class="reset" onclick="resetGame()">
-        Yeni oyun
-    </button>
+    <button class="reset" onclick="resetGame()">Yeni oyun</button>
 
 </div>
 
@@ -202,9 +159,8 @@ function chooseBox(number) {
 
     selected = true;
 
-    const boxes = document.querySelectorAll(".box");
-
-    boxes[number - 1].classList.add("selected");
+    document.querySelectorAll(".box")[number - 1]
+        .classList.add("selected");
 
     document.getElementById("result").textContent =
         "🎉 " + number + "-ci qutu seçildi!";
