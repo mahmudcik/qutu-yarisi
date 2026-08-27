@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Qutu Yarışı</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top,#30205d 0,#100b1d 55%,#07050c 100%);color:#fff;display:flex;justify-content:center;align-items:center;overflow:hidden}
+.wrap{width:min(100%,520px);min-height:100vh;padding:26px 18px 24px;display:flex;flex-direction:column;justify-content:center;text-align:center}
+.badge{display:inline-block;margin:0 auto 10px;padding:7px 14px;border:1px solid #ffffff33;border-radius:999px;background:#ffffff10;font-size:13px}
+h1{margin:0;font-size:38px;letter-spacing:1px;text-shadow:0 5px 22px #000}h1 span{color:#ffd84d}
+.sub{font-size:16px;margin:10px 0 22px;color:#ddd}
+.boxes{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:10px 0 18px}
+.box{border:0;background:transparent;color:#fff;cursor:pointer;padding:0;min-width:0}.box:disabled{cursor:default;opacity:.95}
+.lid,.body{margin:auto;width:100%;aspect-ratio:1/1.02;border-radius:12px;box-shadow:0 12px 24px #0008}
+.lid{height:24px;background:linear-gradient(135deg,#ffdb55,#ff9d16);border:2px solid #ffe99a;margin-bottom:3px}
+.body{position:relative;background:linear-gradient(145deg,#f8b62b,#b85705);border:2px solid #ffd86a;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900}
+.body:after{content:"";position:absolute;left:43%;top:0;width:14%;height:100%;background:#ffe36d99}
+.num{position:absolute;z-index:2;bottom:7px;background:#111c;border-radius:50%;width:30px;height:30px;line-height:30px;font-size:15px}
+.box.open .lid{animation:lid .6s forwards}.box.open .body{animation:pop .6s}.box.win .body{box-shadow:0 0 35px #ffd43b,0 15px 30px #0008}
+@keyframes lid{to{transform:translateY(-30px) rotate(-12deg)}}@keyframes pop{50%{transform:scale(1.08)}}
+.card{background:#ffffff0e;border:1px solid #ffffff22;border-radius:20px;padding:18px;backdrop-filter:blur(10px)}
+.join{font-size:20px;font-weight:800;color:#ffe066}.small{font-size:13px;color:#bbb;margin-top:6px}
+.result{min-height:52px;margin-top:12px;font-size:22px;font-weight:800}
+button.reset{border:0;border-radius:14px;padding:12px 20px;background:#fff;color:#111;font-weight:800;font-size:15px}
+.hidden{display:none}
+@media(max-width:380px){h1{font-size:31px}.sub{font-size:14px}.boxes{gap:5px}.body{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="badge">🎁 TIKTOK LIVE OYUNU</div>
+  <h1>QUTU <span>YARIŞI</span></h1>
+  <div class="sub">1-dən 5-ə qədər bir qutu seç!</div>
+  <div class="boxes" id="boxes"></div>
+  <div class="card">
+    <div class="join">🌹 5 GÜL AT → YARIŞA QOŞUL</div>
+    <div class="small">İştirakçı qutusunu seçəndə həmin qutuya toxun.</div>
+    <div class="result" id="result">Hazırıq! 👀</div>
+    <button class="reset" onclick="newGame()">Yeni oyun</button>
+  </div>
+</div>
+<script>
+let prize;
+function newGame(){
+  prize=Math.floor(Math.random()*5);
+  document.getElementById('result').textContent='Hazırıq! 👀';
+  render();
+}
+function render(){
+  const el=document.getElementById('boxes'); el.innerHTML='';
+  for(let i=0;i<5;i++){
+    const b=document.createElement('button'); b.className='box'; b.innerHTML='<div class="lid"></div><div class="body">🎁<span class="num">'+(i+1)+'</span></div>';
+    b.onclick=()=>openBox(i,b); el.appendChild(b);
+  }
+}
+function openBox(i,b){
+  document.querySelectorAll('.box').forEach(x=>x.disabled=true);
+  b.classList.add('open');
+  setTimeout(()=>{
+    const win=i===prize;
+    if(win){b.classList.add('win');document.getElementById('result').innerHTML='🎉 TƏBRİKLƏR! <span style="color:#ffd84d">1 AZN</span> MÜKAFAT! 💰';}
+    else document.getElementById('result').textContent='😔 Təəssüf, bu qutu boş idi.';
+  },650);
+}
+newGame();
+</script>
+</body>
+</html>
